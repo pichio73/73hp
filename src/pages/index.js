@@ -1,45 +1,68 @@
 import React from "react";
+import Link from "gatsby-link";
+import Slider from 'react-slick';
 
 class Index extends React.Component {
-
   render() {
-    const { data } = this.props;
+    const data = this.props.data
     return (
       <div>
-        <h1>{data.site.siteMetadata.title}</h1>
-        <table style={{ tableLayout: `fixed` }}>
-          <thead>
-            <tr>
-              <th>title</th>
-              <th>date</th>
-              <th>guid</th>
-              <th>source_url</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.allWordpressPost.edges.map(({ node }, index) =>
-              <tr key={index}>
-                <td>
-                  {node.title}
-                </td>
-                <td>
-                  {node.date}
-                </td>
-                <td>
-                  {node.guid}
-                </td>
-                <td>
-                  {node.featured_media.source_url}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <h2>Portfolio</h2>
+        <Slick />
+        {data.allWordpressPost.edges.map(({ node }) => (
+          <div key={node.slug}>
+            <a href={node.featured_media.source_url}>
+              <h3>{node.title}</h3>
+            </a>
+            <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+          </div>
+        ))}
       </div>
     )
   }
 }
 export default Index
+
+class Slick extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      slides: [{name:'first'},{name:'second'},{name:'third'},{name:'forth'}],
+      config: {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    };
+  }
+
+  /** ↓ 本来なくて良いです**/
+  componentDidMount() {
+    setTimeout(() => {
+      let updateSlides = this.state.slides;
+      updateSlides.map((value, index) => {
+        value.name = index + 1;
+        return value;
+      });
+      this.setState({slides: updateSlides});
+    },3000)
+  }
+  /** ↑ 本来なくて良いです**/
+
+  render () {
+    let config = this.state.config;
+    let slides = this.state.slides;
+    return (
+      <Slider {...config}>
+        {slides.map(slide => {
+          return [<div><h3>{slide.name}</h3></div>];
+        })}
+      </Slider>
+    );
+  }
+}
 
 export const query = graphql`
   query indexQuery {
@@ -48,6 +71,7 @@ export const query = graphql`
         node{
           title
           date
+          slug
           guid
           categories {
             name
