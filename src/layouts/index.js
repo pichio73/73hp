@@ -16,7 +16,7 @@ export default ({ children, data }) => {
     <header style={{
       top : 0,
       marginBottom: `1.5rem`,
-      backgroundColor: `#f7faff`,
+      //backgroundColor: `#f7faff`,
       padding: `1vw`,
       position: `fixed`,
       width:`100%`,

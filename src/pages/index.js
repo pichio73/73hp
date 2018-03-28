@@ -1,40 +1,45 @@
 import React from "react";
 
-export default ({ data }) => {
-  return (
-    <div>
-      <h1>{data.site.siteMetadata.title}</h1>
-      <table style={{ tableLayout: `fixed` }}>
-        <thead>
-          <tr>
-            <th>title</th>
-            <th>date</th>
-            <th>guid</th>
-            <th>source_url</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.allWordpressPost.edges.map(({ node }, index) =>
-            <tr key={index}>
-              <td>
-                {node.title}
-              </td>
-              <td>
-                {node.date}
-              </td>
-              <td>
-                {node.guid}
-              </td>
-              <td>
-                {node.featured_media.source_url}
-              </td>
+class Index extends React.Component {
+
+  render() {
+    const { data } = this.props;
+    return (
+      <div>
+        <h1>{data.site.siteMetadata.title}</h1>
+        <table style={{ tableLayout: `fixed` }}>
+          <thead>
+            <tr>
+              <th>title</th>
+              <th>date</th>
+              <th>guid</th>
+              <th>source_url</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
-  )
+          </thead>
+          <tbody>
+            {data.allWordpressPost.edges.map(({ node }, index) =>
+              <tr key={index}>
+                <td>
+                  {node.title}
+                </td>
+                <td>
+                  {node.date}
+                </td>
+                <td>
+                  {node.guid}
+                </td>
+                <td>
+                  {node.featured_media.source_url}
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 }
+export default Index
 
 export const query = graphql`
   query indexQuery {
@@ -52,8 +57,17 @@ export const query = graphql`
           }
         }
       }
-    }    
-   site {
+    }
+    allWordpressPage {
+      edges {
+        node {
+          slug
+          title
+          id
+        }
+      }
+    }
+    site {
       siteMetadata {
         title
       }
