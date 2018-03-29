@@ -38,7 +38,7 @@ export default ({ children, data }) => {
       </ul>
       </nav>
     </header>
-    <div style={{ maxWidth: 650, margin: `0 auto`, padding: `2rem 1rem` }}>
+    <div style={{ maxWidth: 1200, margin: `0 auto`, padding: `2rem 1rem` }}>
       {children()}
     </div>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />

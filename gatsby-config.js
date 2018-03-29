@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: `/cat-73hp`,
+  pathPrefix: `/73hp`,
   siteMetadata: {
     title: `73hp`,
   },
