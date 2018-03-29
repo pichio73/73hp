@@ -34,11 +34,12 @@ export default ({ children, data }) => {
       <ul style={{ listStyle: `none`}}>
         <ListLink to="/">Home</ListLink>
         <ListLink to="/about/">About</ListLink>
+        <ListLink to="/portfolio/">Portfolio</ListLink>
         <ListLink to="/contact/">Contact</ListLink>
       </ul>
       </nav>
     </header>
-    <div style={{ maxWidth: 1200, margin: `0 auto`, padding: `2rem 1rem` }}>
+    <div style={{ maxWidth: `80%`, margin: `0 auto`, padding: `2rem 1rem` }}>
       {children()}
     </div>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
